@@ -53,9 +53,7 @@
                                 <h5>sidebar</h5>
                                 @foreach ($categories as $category)
                                 <div class="card-body">
-                                    <p>{{$category->id}}</p>
                                     <button class="d-block mx-auto"><a href="http://127.0.0.1:8000/products/category/{{$category->id}}" class="btn btn-primary ">{{ $category->name }}</a>  </button>
-
                                 </div>
                                 @endforeach
                             </div>

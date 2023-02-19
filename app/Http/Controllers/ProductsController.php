@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -27,8 +28,15 @@ class ProductsController extends Controller
 
     // qikjo ti kthen veq prej kategoris me id qe ja ke jep
     public function getProductsByCategory($id) {
-        $products = Product::where('category_id', $id).get();
-        return view('dashboard.products.index')->with('products', $products);
+        $slides = Slide::take(4)->get();   //po i thirr ne kete variabel slides prej db edhe shfaqi 3 slide
+        $products = Product::where('category_id', $id)->paginate(4);
+        $categories = Category::get();
+
+        return view('home',[
+            'slides' => $slides,    //edhe slides ja dergone te home me u shfaq sliderat
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
     /**
      * Show the form for creating a new resource.
